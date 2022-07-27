@@ -13,12 +13,23 @@ async def root():
     
 @app.get("/feed")
 async def root():
-    return {"message": "feed"}
+    res = twitter_client.GetHomeTimeline()
+    return {"message": res}
 
 @app.get("/tweet")
 async def root():
-    return {"Author": "AuthorID", "LikedBy": [{123, 321, 213, 312}], "Comments" : [{123, 321, 213, 312}]}
+    id = 1548398318471942147
+    res = twitter_client.GetStatus(id)
+    return res
 
 @app.get("/profile")
 async def root():
-    return {"Author": "AuthorID", "LikedBy": [{123, 321, 213, 312}], "Comments" : [{123, 321, 213, 312}]}
+    id = 1721070150
+    res = twitter_client.GetUser(id)
+    return res
+
+@app.get("/comments")
+async def root():
+    id = 1551652670561169409 
+    res = twitter_client.GetReplies(id)
+    return res
